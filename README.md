@@ -25,6 +25,8 @@ Answer 5 questions about your goals, KPIs, clients, and working style. The wizar
 
 Get your first scorecard, task ranking, and spear-sharpening check. No Notion, no API keys, no setup beyond this.
 
+![Cockpit dashboard showing KPI scorecard, task ranking, and spear-sharpening alert](docs/images/goaly-cockpit-dashboard.png)
+
 ## What You Get
 
 ### 10 Skills
@@ -67,6 +69,8 @@ Top 3-5 tasks become the **Pareto 20%**.
 
 7. **The Spear-Sharpening Check** — if 3+ tasks shipped but zero KPIs moved, it flags: *"You're sharpening the spear instead of hunting the mammoth."*
 
+![Spear sharpening: 14 tasks shipped, 1 KPI moved](docs/images/goaly-spear-sharpening.png)
+
 Weekday pulse mode: just the scorecard, flags, and today's tasks. 2-3 minutes, zero interaction.
 
 ## Architecture
@@ -88,6 +92,8 @@ notion-mirror/
 
 Each file has YAML frontmatter with properties and a markdown body. See `notion-mirror/README.md` for the full format.
 
+![Goals cascade to KPIs to Projects to Tasks](docs/images/goaly-goal-hierarchy.png)
+
 **Notion is optional.** You can:
 - Write files by hand
 - Generate them with `/goaly-setup`
@@ -101,6 +107,8 @@ Every skill follows the same pattern:
 1. **Collect** — gather all data in parallel (no serial API calls)
 2. **Analyze** — reason over collected data (no further I/O)
 3. **Interact** — present findings and ask structured questions
+
+![Three-phase execution pattern](docs/images/goaly-three-phase.png)
 
 ### Shared Conventions
 
