@@ -1,0 +1,81 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /triage skill
+# Run: promptfoo eval -c tests/triage/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Triage Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-triage/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-triage/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Test 1: Full triage output ---
+
+  - description: "Full triage — calendar and email scan"
+    vars:
+      today: "2026-03-13"
+      trigger: "check calendar and emails"
+    assert:
+      - type: icontains
+        value: "Calendar"
+      - type: icontains
+        value: "Email"
+      - type: llm-rubric
+        value: >
+          Does the output present a structured triage with clearly separated sections?
+          It should show calendar items and email items grouped by urgency
+          (urgent / this week / FYI). It should demonstrate that ignore rules are applied
+          (Vercel, Xero, newsletters filtered out) and surface rules are applied
+          (client replies and meeting invites shown). The output should use scannable
+          lists or tables, not prose paragraphs.
+
+  # --- Test 2: Ignore rules applied ---
+
+  - description: "Ignore rules — noise filtered out"
+    vars:
+      today: "2026-03-13"
+      trigger: "anything I'm missing?"
+    assert:
+      - type: not-contains
+        value: "Vercel"
+      - type: not-contains
+        value: "Xero"
+      - type: not-icontains
+        value: "newsletter"
+      - type: llm-rubric
+        value: >
+          Does the output correctly filter out noise emails? It should NOT mention
+          Vercel deployment notifications, Xero invoices, or newsletter/promotional
+          emails. Only actionable items from real people should appear. The triage
+          should demonstrate that automated notifications and billing emails are
+          silently ignored.
+
+  # --- Test 3: Surface rules applied ---
+
+  - description: "Surface rules — actionable items shown"
+    vars:
+      today: "2026-03-13"
+      trigger: "check emails"
+    assert:
+      - type: icontains
+        value: "client"
+      - type: llm-rubric
+        value: >
+          Does the output surface actionable email items? It should show:
+          1) Client replies that need a response (e.g., BigCorp Q2 planning reply)
+          2) Meeting invites from real people (e.g., Client-E product strategy session)
+          3) Unknown sender emails flagged for review
+          Each surfaced item should include context about why it's actionable and
+          suggest a handoff skill where appropriate (e.g., /client-email, /meeting-prep).

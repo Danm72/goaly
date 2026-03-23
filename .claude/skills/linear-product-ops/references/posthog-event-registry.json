@@ -1,0 +1,1186 @@
+{
+  "last_updated": "2026-03-20",
+  "source": "Client-B Linear workspace (team: YOUR-PAGE-ID-TASK-3)",
+  "extraction_notes": "Scanned all 128 issues. 16 issues contain explicit PostHog tracking plans or PostHog event references. Events from formal 'PostHog Tracking Plan' sections are marked chat_prd; events mentioned in 'How to Measure Success' sections are marked manual.",
+  "events": [
+    {
+      "name": "job_board_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["auth_status"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_card_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["job_id", "job_title", "sport", "location", "auth_status"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_applied",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["filter_type"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_saved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["job_id", "source"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_unsaved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_jobs_view_opened",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_toggled",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["state"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_cta_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_modal_confirmed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["job_id", "profile_completeness_pct"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_blocked_incomplete_profile",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["missing_fields"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "login_prompt_shown_from_job_board",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-44",
+      "issue_title": "Job board -- Exploring, Saving, Applying to Jobs (Users)",
+      "properties": ["trigger"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_board_index_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-68",
+      "issue_title": "Create job board index page",
+      "properties": ["auth_status", "active_job_count"],
+      "success_target": "job_card_clicked rate >= 40% of job_board_index_viewed sessions",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_card_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-68",
+      "issue_title": "Create job board index page",
+      "properties": ["job_id", "job_title", "sport", "location", "position_in_list"],
+      "success_target": "rate >= 40% of job_board_index_viewed sessions",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with position_in_list property"
+    },
+    {
+      "name": "job_board_scrolled_to_bottom",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-68",
+      "issue_title": "Create job board index page",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_board_empty_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-68",
+      "issue_title": "Create job board index page",
+      "properties": ["filter_type"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "login_prompt_shown_from_job_board",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-68",
+      "issue_title": "Create job board index page",
+      "properties": ["trigger"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Same event as Client-B-44"
+    },
+    {
+      "name": "job_detail_page_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": ["job_id", "job_title", "sport", "location", "source", "easy_apply_enabled"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_detail_apply_cta_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": ["job_id", "cta_type"],
+      "success_target": "apply conversion rate >= 20% for Easy Apply-enabled jobs",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_detail_save_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_detail_share_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_detail_scrolled_to_bottom",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_detail_back_to_index_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-69",
+      "issue_title": "Create job description detail page",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_saved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-70",
+      "issue_title": "Enable users to manually save/bookmark jobs",
+      "properties": ["job_id", "job_title", "sport", "source"],
+      "success_target": ">= 30% of saved jobs result in application within 7 days",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with job_title and sport properties"
+    },
+    {
+      "name": "job_unsaved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-70",
+      "issue_title": "Enable users to manually save/bookmark jobs",
+      "properties": ["job_id", "source"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with source property"
+    },
+    {
+      "name": "job_save_login_prompt_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-70",
+      "issue_title": "Enable users to manually save/bookmark jobs",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_save_login_prompt_converted",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-70",
+      "issue_title": "Enable users to manually save/bookmark jobs",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_jobs_view_opened",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": ["saved_job_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with saved_job_count property"
+    },
+    {
+      "name": "saved_job_card_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": ["job_id", "days_since_saved"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_job_removed_from_list",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_job_expired_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_jobs_empty_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "saved_jobs_apply_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-71",
+      "issue_title": "Create saved/bookmarked jobs index view",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_toggle_enabled",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": ["configured_sports", "configured_locations", "configured_keywords"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_toggle_disabled",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_preferences_updated",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": ["change_type"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_notification_sent",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": ["user_id", "job_id", "match_reason"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_notification_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": ["job_id", "channel"],
+      "success_target": "notification-to-visit conversion rate >= 35%",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_prompt_shown_on_board",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": ["trigger"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_alert_prompt_converted",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-72",
+      "issue_title": "Enable notifications toggle for new or relevant job postings",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_applied",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["filter_type", "filter_value", "result_count"],
+      "success_target": "filter usage rate >= 50% of sessions once job volume grows",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with filter_value and result_count"
+    },
+    {
+      "name": "job_filter_cleared",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["filter_type"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filters_reset",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": [],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_empty_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["active_filters", "sport", "location", "keyword"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_keyword_searched",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["keyword_length", "result_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_sport_selected",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["sport"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_location_entered",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["location_type"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "job_filter_result_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-73",
+      "issue_title": "Enable users to filter by keyword search, sport, location",
+      "properties": ["job_id", "active_filter_types"],
+      "success_target": "filter-to-click conversion >= 60%",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_creation_started",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "org_active_job_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_draft_saved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "job_id", "fields_completed_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_preview_opened",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_published",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "job_id", "job_title", "sport", "location", "easy_apply_enabled", "job_type"],
+      "success_target": "time to first job posted measures onboarding speed; self-service rate should trend toward 100%",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_creation_abandoned",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "last_field_touched"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_creation_validation_error",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-76",
+      "issue_title": "Organizations must have the ability to create new jobs",
+      "properties": ["org_id", "error_field"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_dashboard_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-78",
+      "issue_title": "Create organization dashboard view displaying insights (Views/Applicants/Total Jobs)",
+      "properties": ["org_id", "active_job_count", "total_applicants_alltime"],
+      "success_target": ">= 2 visits/month per active org",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_dashboard_date_range_changed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-78",
+      "issue_title": "Create organization dashboard view displaying insights (Views/Applicants/Total Jobs)",
+      "properties": ["org_id", "range"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_dashboard_job_row_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-78",
+      "issue_title": "Create organization dashboard view displaying insights (Views/Applicants/Total Jobs)",
+      "properties": ["org_id", "job_id", "job_views", "job_applicants"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_dashboard_empty_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-78",
+      "issue_title": "Create organization dashboard view displaying insights (Views/Applicants/Total Jobs)",
+      "properties": ["org_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_dashboard_post_job_cta_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-78",
+      "issue_title": "Create organization dashboard view displaying insights (Views/Applicants/Total Jobs)",
+      "properties": ["org_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "active_job_count", "inactive_job_count"],
+      "success_target": "growing active job count signals healthy org engagement",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_tab_switched",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "tab"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_edit_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_archive_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "job_id", "job_age_days"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_reactivate_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "job_id", "time_archived_days"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_delete_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_post_new_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "current_active_job_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_index_empty_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-79",
+      "issue_title": "Create job index page for organizations displaying active and inactive job postings",
+      "properties": ["org_id", "tab"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_settings_opened",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-80",
+      "issue_title": "Create job settings and preferences view for organizations",
+      "properties": ["org_id", "context", "job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_settings_saved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-80",
+      "issue_title": "Create job settings and preferences view for organizations",
+      "properties": ["org_id", "setting_changed", "new_value"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_default_settings_configured",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-80",
+      "issue_title": "Create job settings and preferences view for organizations",
+      "properties": ["org_id", "defaults_set"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_applicant_notifications_toggled",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-80",
+      "issue_title": "Create job settings and preferences view for organizations",
+      "properties": ["org_id", "job_id", "state"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "org_job_easy_apply_toggled_from_settings",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-80",
+      "issue_title": "Create job settings and preferences view for organizations",
+      "properties": ["org_id", "job_id", "state"],
+      "success_target": ">= 60% of jobs have Easy Apply enabled",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_cta_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id", "job_title", "sport", "profile_completeness_pct"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with job_title, sport, profile_completeness_pct"
+    },
+    {
+      "name": "easy_apply_modal_opened",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id", "missing_fields_count"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_modal_confirmed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id", "profile_completeness_pct", "time_in_modal_seconds"],
+      "success_target": "apply conversion rate (cta_clicked -> confirmed) >= 70%",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Extended version of Client-B-44 event with time_in_modal_seconds"
+    },
+    {
+      "name": "easy_apply_modal_dismissed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_blocked_incomplete_profile",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id", "missing_fields"],
+      "success_target": "blocker rate should be < 20% of easy_apply_cta_clicked",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18",
+      "note": "Same event as Client-B-44"
+    },
+    {
+      "name": "easy_apply_edit_profile_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id", "missing_fields"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_duplicate_prevented",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "easy_apply_confirmation_state_shown",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-82",
+      "issue_title": "Enable one-click applying using Client-B profile data in replacement of resume",
+      "properties": ["job_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_creation_started",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["org_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_published",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["org_id", "job_id", "sport", "location", "external_domain"],
+      "success_target": "external job share of total listings should decrease over time as orgs migrate to native posting",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_detail_viewed",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["job_id", "org_id", "sport", "location", "source"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_apply_cta_clicked",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["job_id", "org_id", "external_domain"],
+      "success_target": "external apply click rate >= 15%",
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_saved",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["job_id", "org_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "external_job_url_validation_error",
+      "project": "Job Boards & Candidate Experience",
+      "issue": "Client-B-83",
+      "issue_title": "Create external job post page (ie. re-posting jobs from external boards)",
+      "properties": ["org_id"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "chat_prd",
+      "created": "2026-03-18"
+    },
+    {
+      "name": "social_trigger_notification_sent",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-16",
+      "issue_title": "Social engagement triggers -- new follower, endorsement, content interaction",
+      "properties": ["trigger_type", "channel"],
+      "success_target": "notification delivery rate >= 98%; return-to-app rate tracked",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "endorsement_reviewed_from_notification",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-16",
+      "issue_title": "Social engagement triggers -- new follower, endorsement, content interaction",
+      "properties": [],
+      "success_target": "tracked as endorsement review rate metric",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "profile_viewed_from_follower_notification",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-16",
+      "issue_title": "Social engagement triggers -- new follower, endorsement, content interaction",
+      "properties": [],
+      "success_target": "follower notification engagement rate tracked",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "push_notification_sent",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-18",
+      "issue_title": "Push notification infrastructure",
+      "properties": ["notification_type", "channel"],
+      "success_target": "push delivery rate >= 97%",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "push_notification_opened",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-18",
+      "issue_title": "Push notification infrastructure",
+      "properties": [],
+      "success_target": "push-driven return-to-app rate tracked",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "in_app_notification_bell_clicked",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-18",
+      "issue_title": "Push notification infrastructure",
+      "properties": [],
+      "success_target": "% of sessions where user opens notification dropdown",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "profile_nudge_sent",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-15",
+      "issue_title": "Profile completion nudges -- tiered notifications based on % complete",
+      "properties": ["tier", "missing_section", "channel"],
+      "success_target": "profile completion rate >= 90% within 30 days of signup; nudge-to-action rate tracked",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "profile_nudge_clicked",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-15",
+      "issue_title": "Profile completion nudges -- tiered notifications based on % complete",
+      "properties": ["tier"],
+      "success_target": "nudge-to-action rate: % who edit profile within 48 hours",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "profile_section_completed",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-15",
+      "issue_title": "Profile completion nudges -- tiered notifications based on % complete",
+      "properties": ["section", "completion_pct_after"],
+      "success_target": null,
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    },
+    {
+      "name": "endorsement_invite_sent_from_nudge",
+      "project": "Notification & Engagement System",
+      "issue": "Client-B-15",
+      "issue_title": "Profile completion nudges -- tiered notifications based on % complete",
+      "properties": [],
+      "success_target": "endorsement request rate from Tier 3 nudge recipients",
+      "status": "defined",
+      "created_by": "manual",
+      "created": "2026-03-16"
+    }
+  ],
+  "funnels": [
+    {
+      "name": "Candidate Job Application Funnel",
+      "epic": "Client-B-44",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_board_viewed",
+        "job_card_clicked",
+        "easy_apply_cta_clicked",
+        "easy_apply_modal_confirmed"
+      ],
+      "success_target": "Drop-off at each step indicates where friction exists"
+    },
+    {
+      "name": "Job Detail Apply Conversion",
+      "epic": "Client-B-69",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_detail_page_viewed",
+        "job_detail_apply_cta_clicked"
+      ],
+      "success_target": "Apply conversion rate >= 20% for Easy Apply-enabled jobs"
+    },
+    {
+      "name": "Easy Apply Modal Conversion",
+      "epic": "Client-B-82",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "easy_apply_cta_clicked",
+        "easy_apply_modal_opened",
+        "easy_apply_modal_confirmed"
+      ],
+      "success_target": "Modal conversion rate >= 70%"
+    },
+    {
+      "name": "Job Board Index Engagement",
+      "epic": "Client-B-68",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_board_index_viewed",
+        "job_card_clicked"
+      ],
+      "success_target": "Click rate >= 40% of sessions"
+    },
+    {
+      "name": "Save-to-Apply Conversion",
+      "epic": "Client-B-70",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_saved",
+        "easy_apply_modal_confirmed"
+      ],
+      "success_target": ">= 30% of saved jobs result in application within 7 days"
+    },
+    {
+      "name": "Filter-to-Click Conversion",
+      "epic": "Client-B-73",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_filter_applied",
+        "job_filter_result_clicked"
+      ],
+      "success_target": ">= 60% filter-to-click conversion"
+    },
+    {
+      "name": "Job Alert Notification Conversion",
+      "epic": "Client-B-72",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "job_alert_notification_sent",
+        "job_alert_notification_clicked"
+      ],
+      "success_target": "Notification-to-visit conversion rate >= 35%"
+    },
+    {
+      "name": "Org Job Creation Flow",
+      "epic": "Client-B-76",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "org_job_creation_started",
+        "org_job_draft_saved",
+        "org_job_published"
+      ],
+      "success_target": "Draft-to-publish rate measures form complexity; self-service rate should trend toward 100%"
+    },
+    {
+      "name": "External Job Conversion",
+      "epic": "Client-B-83",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "external_job_detail_viewed",
+        "external_job_apply_cta_clicked"
+      ],
+      "success_target": "External apply click rate >= 15%"
+    },
+    {
+      "name": "Org Dashboard Retention Signal",
+      "epic": "Client-B-78",
+      "project": "Job Boards & Candidate Experience",
+      "steps": [
+        "org_dashboard_viewed"
+      ],
+      "success_target": ">= 2 visits/month per active org; orgs who visit within 7 days of first job post are more likely to post a second"
+    },
+    {
+      "name": "Profile Completion Nudge Funnel",
+      "epic": "Client-B-15",
+      "project": "Notification & Engagement System",
+      "steps": [
+        "profile_nudge_sent",
+        "profile_nudge_clicked",
+        "profile_section_completed"
+      ],
+      "success_target": "Nudge-to-action rate: % who edit profile within 48 hours; unsubscribe rate < 3%"
+    }
+  ],
+  "issues_scanned": 128,
+  "issues_with_tracking_plans": [
+    "Client-B-44", "Client-B-68", "Client-B-69", "Client-B-70", "Client-B-71", "Client-B-72", "Client-B-73",
+    "Client-B-76", "Client-B-78", "Client-B-79", "Client-B-80", "Client-B-82", "Client-B-83",
+    "Client-B-15", "Client-B-16", "Client-B-18"
+  ],
+  "issues_referencing_posthog_without_events": [
+    "Client-B-37", "Client-B-55", "Client-B-127", "Client-B-38", "Client-B-32", "Client-B-91", "Client-B-23"
+  ]
+}

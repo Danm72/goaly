@@ -1,0 +1,156 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /cockpit skill
+# Run: promptfoo eval -c tests/cockpit/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Cockpit Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-cockpit/SKILL.md"
+    fixture_data: "file://fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-cockpit/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- PULSE mode (2 tests) ---
+
+  - description: "PULSE — weekday, no coaching trigger"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "4"
+      trigger: "/cockpit"
+    assert:
+      - type: contains
+        value: "Scorecard"
+      - type: contains
+        value: "Flags"
+      - type: contains
+        value: "Today"
+      - type: not-contains
+        value: "Energy Budget"
+      - type: not-contains
+        value: "Task Ranking"
+      - type: llm-rubric
+        value: >
+          Does the output present a KPI scorecard table with traffic light indicators
+          (green/yellow/red) and a flags section listing any detected issues?
+
+  - description: "PULSE — stale KPI should be flagged"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "4"
+      trigger: "quick check"
+    assert:
+      - type: contains
+        value: "SaaS Products"
+      - type: icontains
+        value: "stale"
+      - type: llm-rubric
+        value: >
+          Does the output flag the SaaS Products KPI as stale because it has weekly
+          tracking frequency but hasn't been updated in over 10 days?
+
+  # --- MONDAY mode (2 tests) ---
+
+  - description: "MONDAY — full planning mode"
+    vars:
+      today: "2026-03-10"
+      day_of_week: "1"
+      trigger: "/cockpit"
+    assert:
+      - type: contains
+        value: "Scorecard"
+      - type: contains
+        value: "Last Week"
+      - type: contains
+        value: "Energy Budget"
+      - type: contains
+        value: "Task Ranking"
+      - type: llm-rubric
+        value: >
+          Does the output present a complete weekly planning view with:
+          1) KPI scorecard with traffic lights
+          2) Pattern detection flags
+          3) Last week retro with shipped/wasted
+          4) Energy budget with available vs committed slots
+          5) Task ranking table with impact scores
+
+  - description: "MONDAY — auto-cleanup detection"
+    vars:
+      today: "2026-03-10"
+      day_of_week: "1"
+      trigger: "plan my week"
+    assert:
+      - type: contains
+        value: "Deploy staging environment"
+      - type: icontains
+        value: "archived"
+      - type: llm-rubric
+        value: >
+          Does the output mention archiving or cleaning up "Done This Week" tasks,
+          specifically the "Deploy staging environment" task?
+
+  # --- COACHING mode (2 tests) ---
+
+  - description: "COACHING — coaching prep trigger"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "4"
+      trigger: "prep for [Coach]"
+    assert:
+      - type: contains
+        value: "Coaching Agenda"
+      - type: icontains
+        value: "MRR"
+      - type: not-contains
+        value: "Energy Budget"
+      - type: not-contains
+        value: "Task Ranking"
+      - type: llm-rubric
+        value: >
+          Does the output present a coaching-focused agenda that includes:
+          1) Standing coaching items (including MRR question)
+          2) KPI metrics snapshot
+          3) Patterns to discuss (initiation avoidance, dormant clients)
+
+  - description: "COACHING — patterns surfaced for discussion"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "4"
+      trigger: "coaching prep"
+    assert:
+      - type: icontains
+        value: "stalled"
+      - type: icontains
+        value: "frog"
+      - type: llm-rubric
+        value: >
+          Does the output identify initiation avoidance patterns (stalled tasks)
+          and frog tasks (repeatedly planned but never started) as items to discuss
+          with the coach?
+
+  # --- Cross-cutting (1 test) ---
+
+  - description: "CROSS — concentration risk flagged"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "4"
+      trigger: "/cockpit"
+    assert:
+      - type: icontains
+        value: "BigCorp"
+      - type: icontains
+        value: "concentration"
+      - type: llm-rubric
+        value: >
+          Does the output flag BigCorp as a portfolio concentration risk
+          because it represents more than 50% of revenue?

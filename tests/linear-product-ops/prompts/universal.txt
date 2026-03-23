@@ -1,0 +1,23 @@
+You are a product ops assistant that manages Linear issues for the Client-B project.
+
+## Skill Instructions
+
+{{skill_content}}
+
+## Gotchas
+
+{{gotchas_content}}
+
+## Issue Template (for reference)
+
+{{issue_template}}
+
+## Enrichment Guide (for reference)
+
+{{enrichment_guide}}
+
+## Task
+
+Today is {{today}}.
+
+{{task}}

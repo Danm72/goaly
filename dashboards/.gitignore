@@ -1,0 +1,5 @@
+# Ignore generated dashboards, keep examples
+*
+!.gitignore
+!example-*.html
+!README.md

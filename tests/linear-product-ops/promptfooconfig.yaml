@@ -1,0 +1,175 @@
+# promptfooconfig.yaml — Layer 2 eval suite for linear-product-ops skill
+# Run: promptfoo eval -c tests/linear-product-ops/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Linear Product Ops Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 2000
+
+prompts:
+  - file://prompts/universal.txt
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/linear-product-ops/SKILL.md"
+    gotchas_content: "file://../../.claude/skills/linear-product-ops/gotchas.md"
+    issue_template: "file://../../.claude/skills/linear-product-ops/references/issue-template.md"
+    enrichment_guide: "file://../../.claude/skills/linear-product-ops/references/enrichment-guide.md"
+    today: "2026-03-20"
+
+tests:
+  # --- INGEST: Template enforcement ---
+
+  - description: "INGEST — new issue has all 6 template sections including PostHog tracking"
+    vars:
+      task: |
+        INGEST MODE: Create a new Linear issue from this transcript excerpt:
+
+        Arthur said we need a feature where organizations can view their applicant pipeline. Like a kanban board showing Applied, Screening, Interview, Offer stages. Each card shows the candidate name, sport, and when they applied. Orgs should be able to drag candidates between stages. We want to track how many orgs actually use this vs just posting jobs and forgetting.
+
+        Output the full issue description using the issue template. Include all 6 required sections.
+    assert:
+      - type: contains
+        value: "What This Is"
+      - type: contains
+        value: "Intended User Experience"
+      - type: contains
+        value: "Intended Outcomes"
+      - type: contains
+        value: "Acceptance Criteria"
+      - type: contains
+        value: "Dependencies"
+      - type: contains
+        value: "PostHog Tracking Plan"
+      - type: llm-rubric
+        value: >
+          Does the output contain a complete Linear issue description with all 6 required
+          sections (What This Is, Intended User Experience, Intended Outcomes, Acceptance
+          Criteria, Dependencies, PostHog Tracking Plan)? The PostHog section must have
+          at least one snake_case event name with properties and a quantitative success target.
+
+  # --- INGEST: Deduplication ---
+
+  - description: "INGEST — enriches existing issue instead of creating duplicate"
+    vars:
+      task: |
+        INGEST MODE: Process this transcript excerpt. Note that issue Client-B-68 "Create job board index page" already exists with a full description.
+
+        Transcript: We discussed adding a loading skeleton to the job board index page while jobs are being fetched. Also want to add infinite scroll instead of pagination. The empty state when no jobs match filters should show a friendly illustration.
+
+        Should you create a new issue or enrich the existing Client-B-68? Explain your reasoning.
+    assert:
+      - type: icontains
+        value: "enrich"
+      - type: not-contains
+        value: "## What This Is"
+      - type: llm-rubric
+        value: >
+          Does the model correctly identify that this finding relates to the existing
+          Client-B-68 "Create job board index page" issue and recommend enriching it rather
+          than creating a new duplicate issue? The output should explain the deduplication reasoning.
+
+  # --- ENRICH: Preservation ---
+
+  - description: "ENRICH — preserves existing description and appends new section"
+    vars:
+      task: |
+        ENRICH MODE: Enrich the following existing Linear issue with new context.
+
+        EXISTING DESCRIPTION (must be preserved verbatim):
+        ## What This Is
+
+        A public-facing job board index page where candidates can browse and discover available positions in the sports industry.
+
+        ## Intended User Experience
+
+        Users land on /jobs and see a grid of job cards. Each card shows the job title, organization, sport, location, and posting date. Cards are clickable.
+
+        ## PostHog Tracking Plan
+
+        * `job_board_index_viewed` — page load (properties: `auth_status`, `active_job_count`)
+        * `job_card_clicked` — user clicks a card (properties: `job_id`, `position_in_list`)
+
+        NEW CONTEXT TO APPEND:
+        From the March 20 product call: Arthur wants to add a "featured jobs" section at the top of the board for premium org listings. Featured jobs should have a distinct visual treatment (gold border, badge). Orgs pay extra for featuring.
+
+        Output the COMPLETE updated description — existing content preserved + new section appended.
+    assert:
+      - type: contains
+        value: "What This Is"
+      - type: contains
+        value: "public-facing job board index page"
+      - type: contains
+        value: "job_board_index_viewed"
+      - type: contains
+        value: "job_card_clicked"
+      - type: icontains
+        value: "featured"
+      - type: icontains
+        value: "2026-03-20"
+      - type: llm-rubric
+        value: >
+          Does the output preserve ALL existing description content verbatim (including
+          the What This Is section, UX section, and PostHog plan) AND append a new dated
+          enrichment section about featured jobs? The original content must not be modified, shortened, or reworded.
+
+  # --- AUDIT: Gap detection ---
+
+  - description: "AUDIT — flags issues missing PostHog tracking and thin descriptions"
+    vars:
+      task: |
+        AUDIT MODE: Review this board snapshot and flag quality issues.
+
+        | Issue | Title | Project | Desc Length | Has PostHog? |
+        |-------|-------|---------|-------------|-------------|
+        | Client-B-44 | Job board — Exploring, Saving, Applying | Job Boards | 2400 chars | Yes |
+        | Client-B-50 | Fix login redirect bug | — | 45 chars | No |
+        | Client-B-51 | Add dark mode toggle | Settings | 80 chars | No |
+        | Client-B-68 | Create job board index page | Job Boards | 1800 chars | Yes |
+        | Client-B-90 | TBD — placeholder | — | 0 chars | No |
+
+        Present findings as a table with severity and suggested fixes.
+    assert:
+      - type: contains
+        value: "Client-B-50"
+      - type: contains
+        value: "Client-B-51"
+      - type: contains
+        value: "Client-B-90"
+      - type: icontains
+        value: "PostHog"
+      - type: llm-rubric
+        value: >
+          Does the output present a findings table that flags:
+          1) Client-B-50 for missing PostHog tracking AND thin description AND no project
+          2) Client-B-51 for missing PostHog tracking AND thin description
+          3) Client-B-90 for missing PostHog tracking AND empty description AND no project
+          Each finding should have a severity level and a suggested fix.
+          Client-B-44 and Client-B-68 should NOT be flagged as problems.
+
+  # --- PostHog naming ---
+
+  - description: "POSTHOG — generated event names are snake_case with entity IDs"
+    vars:
+      task: |
+        Create a PostHog Tracking Plan section for this feature:
+
+        A user profile settings page where athletes can update their bio, upload a profile photo, set their preferred sport, and toggle visibility (public/private). The page should track how many users complete their profile after visiting settings.
+
+        Output ONLY the PostHog Tracking Plan section with event names, properties, and a success target.
+    assert:
+      - type: not-icontains
+        value: "Page Viewed"
+      - type: not-contains
+        value: "pageViewed"
+      - type: llm-rubric
+        value: >
+          Does the PostHog tracking plan section contain:
+          1) Event names that are strictly snake_case (lowercase with underscores, no spaces, no camelCase)?
+          2) At least one event that includes a user/profile entity ID in its properties?
+          3) A quantitative success target (a number or percentage, not vague language)?
+          Check every event name — if ANY event name contains uppercase letters or spaces, this FAILS.

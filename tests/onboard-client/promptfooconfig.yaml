@@ -1,0 +1,87 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /onboard-client skill
+# Run: promptfoo eval -c tests/onboard-client/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Onboard Client Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-onboard-client/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-onboard-client/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Full Onboarding ---
+
+  - description: "FULL — new client triggers complete onboarding"
+    vars:
+      today: "2026-03-13"
+      trigger: "new client TestCo"
+    assert:
+      - type: contains
+        value: "Client file"
+      - type: contains
+        value: "Contact"
+      - type: contains
+        value: "Project"
+      - type: contains
+        value: "MEMORY.md"
+      - type: llm-rubric
+        value: >
+          Does the output describe a complete client onboarding that includes:
+          1) Creating a client markdown file in notion-mirror/clients/ with title and status
+          2) Creating contact files in notion-mirror/contacts/
+          3) Creating a client folder with README.md
+          4) Creating a project file in notion-mirror/projects/ with goal relation
+          5) Setting up time tracking via gog sheets copy
+          6) Updating MEMORY.md Active Leads section
+          7) Updating notion-reference.md with client and project IDs
+
+  # --- Contract-Only ---
+
+  - description: "CONTRACT — contract-only skips CRM creation"
+    vars:
+      today: "2026-03-13"
+      trigger: "create a contract for BigCorp"
+    assert:
+      - type: icontains
+        value: "contract"
+      - type: icontains
+        value: "template"
+      - type: not-contains
+        value: "Create Client file"
+      - type: llm-rubric
+        value: >
+          Does the output describe a contract-only flow that:
+          1) Verifies BigCorp exists in notion-mirror/clients/
+          2) Reads the existing client file for Context and Strategy Notes
+          3) Proceeds to contract template selection (Step 6) without creating new CRM entries
+          4) Does NOT create a new client file, contact files, or client folder
+          5) References protective concerns from Strategy Notes in contract review
+
+  # --- Two-Batch Strategy ---
+
+  - description: "TWO-BATCH — commits CRM files before project files"
+    vars:
+      today: "2026-03-13"
+      trigger: "onboard TestCo"
+    assert:
+      - type: icontains
+        value: "batch"
+      - type: llm-rubric
+        value: >
+          Does the output describe a two-batch commit strategy where:
+          1) Batch 1 commits client file, contact files, and client folder first
+          2) Sync is verified by checking .sync-log/push.log after batch 1
+          3) Batch 2 commits project file, memory updates, and notion-reference.md after sync verification
+          4) The reason for two batches is explained: project needs client_id from sync engine

@@ -1,0 +1,132 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /screen-lead skill
+# Run: promptfoo eval -c tests/screen-lead/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Screen Lead Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-screen-lead/SKILL.md"
+    fixture_data: "file://fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-screen-lead/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Lead with clear green flags ---
+
+  - description: "GREEN — lead with strong signals produces structured assessment"
+    vars:
+      today: "2026-03-13"
+      trigger: "screen this lead"
+      lead_research: |
+        Name: Sarah Chen
+        Email: sarah@velocityai.com
+        Company: VelocityAI
+        Website: https://velocityai.com — AI-powered sales analytics platform
+        LinkedIn: 8 years CTO experience at two funded startups, previously engineering lead at Stripe
+        Company Stage: Series A, raised $4M in 2025
+        Team: 12 engineers, looking for fractional CTO to mentor eng leads
+        Revenue: $800K ARR, growing 15% MoM
+        Tech Stack: Next.js, Python, PostgreSQL, deployed on AWS
+        How Found [Owner]: Read his blog post on "The Fractional CTO Playbook"
+        Budget: "We have a confirmed budget of EUR 5K/month for advisory"
+        First Contact: Detailed email explaining specific challenges with scaling their data pipeline
+    assert:
+      - type: icontains
+        value: "Green Flag"
+      - type: icontains
+        value: "Fit for [Owner]"
+      - type: icontains
+        value: "Qualifying Questions"
+      - type: llm-rubric
+        value: >
+          Does the output produce a structured lead research report with:
+          1) Profile Summary section
+          2) Company Summary section
+          3) Green Flags identified (confirmed budget, content-sourced, funded, growing revenue, clear problem)
+          4) Fit for [Owner] section recommending fCTO retainer model
+          5) Qualifying Questions tailored to remaining unknowns
+          6) No red flags that would block engagement
+
+  # --- Lead with red flags ---
+
+  - description: "RED — lead with warning signals identifies risks"
+    vars:
+      today: "2026-03-13"
+      trigger: "research this lead"
+      lead_research: |
+        Name: Jake Thompson
+        Email: jake@disruptx.io
+        Company: DisruptX
+        Website: https://disruptx.io — mostly stock images, "revolutionizing the future of AI-powered blockchain"
+        LinkedIn: 6 months at DisruptX as "CEO & Visionary", before that 2 years as marketing coordinator at a gym chain
+        Company Stage: Pre-revenue, no funding disclosed
+        Team: "We're building a world-class team" — no engineers listed
+        Revenue: None mentioned
+        Tech Stack: "Proprietary AI engine" — no specifics, no GitHub, no public repos
+        How Found [Owner]: Cold email via LinkedIn
+        Budget: "We can offer equity and a small monthly retainer once we close our seed round"
+        First Contact: "We need someone to build our MVP ASAP, launch in 6 weeks, must be full-stack AI/blockchain/mobile"
+    assert:
+      - type: icontains
+        value: "Red Flag"
+      - type: icontains
+        value: "budget"
+      - type: llm-rubric
+        value: >
+          Does the output identify multiple red flags? Specifically:
+          1) No confirmed budget (equity + future retainer = no budget)
+          2) AI buzzword overload ("AI-powered blockchain", "proprietary AI engine")
+          3) ASAP + ambitious scope (MVP in 6 weeks, full-stack AI/blockchain/mobile)
+          4) Title shifting / thin career background
+          5) Pre-revenue with no funding
+          6) Stock website with no real content
+          7) Cold outreach (not content-sourced)
+          8) Bottom line should recommend passing or extreme caution
+          The report should still be structured (Profile, Company, Flags, Fit) not just a rejection.
+
+  # --- Reply draft mode ---
+
+  - description: "REPLY — produces reply draft after [Owner] confirms interest"
+    vars:
+      today: "2026-03-13"
+      trigger: "screen this lead"
+      lead_research: |
+        Name: Maria Gonzalez
+        Email: maria@greentech.eu
+        Company: GreenTech Solutions
+        Website: https://greentech.eu — B2B sustainability reporting SaaS
+        LinkedIn: 12 years in tech, VP Engineering at SAP, now founder
+        Company Stage: Seed, EUR 1.5M raised
+        Team: 6 engineers, 2 designers
+        Revenue: EUR 200K ARR, 8 enterprise clients
+        Tech Stack: React, Node.js, PostgreSQL, Azure
+        How Found [Owner]: Referral from Contact-10 (Shift)
+        Budget: "EUR 3-5K/month for a fractional CTO, confirmed"
+        First Contact: "Looking for someone to help us architect our multi-tenant platform migration"
+
+        [Owner] says: "Interested — draft a reply"
+    assert:
+      - type: icontains
+        value: "reply"
+      - type: not-contains
+        value: "schedule a call"
+      - type: llm-rubric
+        value: >
+          Does the output include a reply draft that:
+          1) Is written in [Owner]'s voice (direct, contractions, short sentences, no corporate buzzwords)
+          2) Does NOT offer or suggest a call
+          3) Angles toward a retainer model, not a fixed-scope project
+          4) Asks the budget question directly
+          5) Is upfront about boundaries (what [Owner] doesn't do)
+          6) Qualifies rather than promises
+          7) Also describes creating client file, contact file, task, and MEMORY.md update

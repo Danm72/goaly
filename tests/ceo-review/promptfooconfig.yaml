@@ -1,0 +1,145 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /ceo-review skill
+# Run: promptfoo eval -c tests/ceo-review/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "CEO Review Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-ceo-review/SKILL.md"
+    fixture_data: "file://fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-ceo-review/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- HOLD SCOPE mode ---
+
+  - description: "HOLD SCOPE — challenges overcommitment on existing plan"
+    vars:
+      today: "2026-03-13"
+      trigger: "review this plan"
+      posture: "HOLD SCOPE"
+      plan: |
+        # Client-B — Real-time Notification System
+
+        ## Overview
+        Build a real-time push notification system for Client-B app using WebSockets
+        and Firebase Cloud Messaging. Includes in-app notification center, email digests,
+        and SMS alerts for premium users.
+
+        ## Scope
+        - WebSocket server for live score updates
+        - Firebase Cloud Messaging integration (iOS + Android)
+        - In-app notification center with read/unread state
+        - Email digest system (daily/weekly configurable)
+        - SMS gateway integration for premium tier
+        - Admin dashboard for broadcast notifications
+        - A/B testing framework for notification copy
+        - Analytics pipeline for open rates and engagement
+
+        ## Timeline
+        6 weeks, [Owner] as sole implementer
+    assert:
+      - type: icontains
+        value: "Ikigai"
+      - type: icontains
+        value: "Critical Gaps"
+      - type: icontains
+        value: "Warnings"
+      - type: llm-rubric
+        value: >
+          Does the output apply HOLD SCOPE posture correctly? It should:
+          1) Score the plan on ikigai dimensions (4 dimensions with 0/1 each)
+          2) List critical gaps (missing acceptance criteria, error states, rollback)
+          3) List warnings (6-week timeline risk for sole implementer, SMS scope creep)
+          4) Challenge whether [Owner] should implement vs delegate execution
+          5) NOT suggest expanding scope or adding features
+          6) Recommend /plan as next step with gaps to address
+
+  # --- SCOPE REDUCTION mode ---
+
+  - description: "SCOPE REDUCTION — strips overcommitted plan"
+    vars:
+      today: "2026-03-13"
+      trigger: "strategic review"
+      posture: "SCOPE REDUCTION"
+      plan: |
+        # Client-A — Full Platform Rebuild
+
+        ## Overview
+        Rebuild Client-A from scratch: new React frontend, new API layer, AI content
+        generation pipeline, user analytics, CMS, billing system, and mobile app.
+
+        ## Scope
+        - React frontend with Tailwind
+        - REST API with authentication
+        - AI content generation (GPT-4 integration)
+        - Stripe billing with subscription tiers
+        - Analytics dashboard
+        - CMS for editorial content
+        - Mobile app (React Native)
+        - SEO optimization suite
+        - Social media auto-posting
+
+        ## Timeline
+        3 months, Month 1 is free (design partnership)
+    assert:
+      - type: icontains
+        value: "cut"
+      - type: icontains
+        value: "keep"
+      - type: llm-rubric
+        value: >
+          Does the output apply SCOPE REDUCTION posture correctly? It should:
+          1) Present a "cut" and "keep" list with justifications
+          2) Challenge the 3-month timeline for this scope
+          3) Identify gold-plating (SEO suite, social auto-posting, mobile app as v1 scope creep)
+          4) Suggest a 1-day vs 1-week version or phased approach
+          5) Flag that Month 1 free with this scope is a bad deal for [Owner]
+          6) Score ikigai alignment
+
+  # --- Ikigai alignment check ---
+
+  - description: "IKIGAI — flags low-alignment admin plan"
+    vars:
+      today: "2026-03-13"
+      trigger: "review this plan"
+      posture: "HOLD SCOPE"
+      plan: |
+        # Operations — Migrate Accounting to New Platform
+
+        ## Overview
+        Migrate all [Your Company] accounting from Xero to a self-hosted accounting system.
+        Build custom invoicing, expense tracking, VAT calculation, and reporting.
+
+        ## Scope
+        - Self-hosted accounting database
+        - Custom invoice generator
+        - Expense categorization with receipt OCR
+        - VAT calculation engine for Irish tax
+        - Monthly P&L report generator
+        - Bank feed integration
+
+        ## Timeline
+        4 weeks
+    assert:
+      - type: icontains
+        value: "Ikigai"
+      - type: llm-rubric
+        value: >
+          Does the output flag this plan as low ikigai alignment? Specifically:
+          1) Love/Energy should score 0 (accounting migration is draining admin work)
+          2) Good At should score 0-1 (not [Owner]'s strategic strength)
+          3) Needs/Impact should score 0 (Xero already works, no real value created)
+          4) Paid For should score 0 (internal ops, no revenue)
+          5) Total should be 0-1/4, triggering a hard challenge
+          6) Should suggest keeping Xero or hiring a bookkeeper instead

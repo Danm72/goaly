@@ -1,0 +1,67 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /coaching-prep skill
+# Run: promptfoo eval -c tests/coaching-prep/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Coaching Prep Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-coaching-prep/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-coaching-prep/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  - description: "Normal coaching prep — builds agenda with KPIs and standing items"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "Thursday"
+      trigger: "prep for [Coach]"
+    assert:
+      - type: icontains
+        value: "MRR"
+      - type: icontains
+        value: "Standing"
+      - type: not-contains
+        value: "Follow-up email"
+      - type: llm-rubric
+        value: >
+          Does the output present a coaching-focused agenda that includes:
+          1) KPI metrics snapshot with current vs target values
+          2) Standing items from MEMORY.md
+          3) No follow-up email draft (that's for client mode)
+
+  - description: "Unmeasured goal flagged"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "Thursday"
+      trigger: "coaching prep"
+    assert:
+      - type: icontains
+        value: "unmeasured"
+      - type: llm-rubric
+        value: >
+          Does the output flag at least one active goal as unmeasured
+          (having no KPIs linked to it)?
+
+  - description: "Stalled tasks surfaced for coaching discussion"
+    vars:
+      today: "2026-03-13"
+      day_of_week: "Thursday"
+      trigger: "coaching prep"
+    assert:
+      - type: icontains
+        value: "stalled"
+      - type: llm-rubric
+        value: >
+          Does the output identify tasks stuck for more than 14 days
+          as patterns to discuss with the coach?

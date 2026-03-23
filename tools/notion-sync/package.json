@@ -1,0 +1,29 @@
+{
+  "name": "@goaly/notion-sync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bidirectional Notion ↔ Markdown sync engine — [Your Company]",
+  "type": "module",
+  "scripts": {
+    "sync": "tsx sync.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.0",
+    "notion-to-md": "3.1.9",
+    "@tryfabric/martian": "1.2.4",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "p-queue": "^8.0.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "vitest": "^3.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "msw": "^2.0.0"
+  }
+}

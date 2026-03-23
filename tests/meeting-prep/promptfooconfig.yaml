@@ -1,0 +1,76 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /meeting-prep skill
+# Run: promptfoo eval -c tests/meeting-prep/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Meeting Prep Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-meeting-prep/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-meeting-prep/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Normal client prep ---
+
+  - description: "Normal client prep — structured agenda output"
+    vars:
+      today: "2026-03-13"
+      trigger: "prep for BigCorp meeting"
+    assert:
+      - type: contains
+        value: "Questions to Ask"
+      - type: contains
+        value: "My Positioning"
+      - type: contains
+        value: "Watch For"
+      - type: llm-rubric
+        value: >
+          Does the output present a structured meeting agenda for BigCorp that includes:
+          1) Context section with engagement background
+          2) Questions to Ask grouped by theme
+          3) My Positioning section informed by client strategy notes
+          4) Watch For section with red flags or scope creep signals
+          5) Open tasks table for the client
+
+  # --- [Coach] redirect ---
+
+  - description: "[Coach] redirect — stops and redirects to /coaching-prep"
+    vars:
+      today: "2026-03-13"
+      trigger: "prep for [Coach]"
+    assert:
+      - type: contains
+        value: "coaching-prep"
+      - type: not-contains
+        value: "Questions to Ask"
+      - type: llm-rubric
+        value: >
+          Does the output stop processing immediately and redirect the user to
+          the /coaching-prep skill? It should NOT produce a meeting agenda, questions,
+          or positioning. It should clearly state that [Coach] sessions use a different skill.
+
+  # --- Handoff to review-meeting ---
+
+  - description: "Handoff — suggests /review-meeting after the call"
+    vars:
+      today: "2026-03-13"
+      trigger: "prep for BigCorp meeting"
+    assert:
+      - type: icontains
+        value: "review-meeting"
+      - type: llm-rubric
+        value: >
+          Does the output end with a suggestion to run /review-meeting after the call
+          to process the transcript? The handoff message should mention the client name
+          and direct the user to the review-meeting skill.

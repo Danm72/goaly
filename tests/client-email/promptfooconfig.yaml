@@ -1,0 +1,96 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /client-email skill
+# Run: promptfoo eval -c tests/client-email/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Client Email Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-client-email/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-client-email/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Email Draft mode ---
+
+  - description: "DRAFT — email BigCorp, loads tone and strategy"
+    vars:
+      today: "2026-03-13"
+      trigger: "email BigCorp about Q2 planning"
+    assert:
+      - type: icontains
+        value: "tone of voice"
+      - type: icontains
+        value: "Strategy Notes"
+      - type: not-contains
+        value: "schedule a call"
+      - type: llm-rubric
+        value: >
+          Does the output draft a message in [Owner]'s voice (direct, conversational,
+          uses contractions, short sentences) and reference client Strategy Notes
+          to inform what to include or exclude? The draft should NEVER offer or
+          suggest a call.
+
+  # --- Read-only mode ---
+
+  - description: "READ — check emails, no unsolicited draft"
+    vars:
+      today: "2026-03-13"
+      trigger: "check emails from BigCorp"
+    assert:
+      - type: icontains
+        value: "Interaction"
+      - type: not-contains
+        value: "draft"
+      - type: llm-rubric
+        value: >
+          Does the output summarize recent BigCorp emails/interactions and create
+          an inbound Interaction file, WITHOUT producing an unsolicited draft
+          response? Read-only mode should surface action items but not compose
+          any reply.
+
+  # --- WhatsApp mode ---
+
+  - description: "WHATSAPP — log WhatsApp interaction"
+    vars:
+      today: "2026-03-13"
+      trigger: "check what BigCorp sent on WhatsApp"
+    assert:
+      - type: icontains
+        value: "WhatsApp"
+      - type: llm-rubric
+        value: >
+          Does the output detect WhatsApp mode, plan to create an Interaction file
+          with type "WhatsApp" and direction "Inbound", and present the message
+          content for manual platform response (not email sending)?
+
+  # --- Slack mode ---
+
+  - description: "SLACK — review Slack DMs, log interaction"
+    vars:
+      today: "2026-03-14"
+      trigger: "check slack with BigCorp"
+    assert:
+      - type: icontains
+        value: "Slack"
+      - type: icontains
+        value: "Interaction"
+      - type: not-contains
+        value: "schedule a call"
+      - type: llm-rubric
+        value: >
+          Does the output detect Slack mode, plan to search for the client's
+          Slack DMs or channels, create an Interaction file with type "Slack"
+          and direction "Inbound", and focus on extracting decisions, feedback,
+          and action items rather than casual messages? It should NOT offer
+          to schedule a call.

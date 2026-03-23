@@ -1,0 +1,93 @@
+# promptfooconfig.yaml — Layer 2 eval suite for /review-meeting skill
+# Run: promptfoo eval -c tests/review-meeting/promptfooconfig.yaml
+# View: promptfoo view
+
+description: "Review Meeting Skill Eval Suite"
+
+providers:
+  - id: anthropic:messages:claude-sonnet-4-20250514
+    config:
+      temperature: 0
+      max_tokens: 4096
+
+prompts:
+  - "file://prompt-template.txt"
+
+defaultTest:
+  vars:
+    skill_content: "file://../../.claude/skills/goaly-review-meeting/SKILL.md"
+    fixture_data: "file://../shared-fixtures/fixtures-concat.md"
+    gotchas_content: "file://../../.claude/skills/goaly-review-meeting/gotchas.md"
+    conventions_content: "file://../../.claude/skills/_shared/conventions.md"
+
+tests:
+  # --- Coaching mode ---
+
+  - description: "COACHING — updates MEMORY and dan-profile"
+    vars:
+      today: "2026-03-13"
+      trigger: "review coaching call"
+    assert:
+      - type: icontains
+        value: "MEMORY"
+      - type: icontains
+        value: "dan-profile"
+      - type: not-contains
+        value: "follow-up email"
+      - type: llm-rubric
+        value: >
+          Does the output describe updating MEMORY.md standing items and/or
+          dan-profile.md with coaching insights from the session? It should
+          NOT suggest drafting a follow-up email (coaching mode has no email step).
+
+  # --- Client mode ---
+
+  - description: "CLIENT — Strategy Notes and follow-up email"
+    vars:
+      today: "2026-03-13"
+      trigger: "review BigCorp call"
+    assert:
+      - type: icontains
+        value: "Strategy Notes"
+      - type: icontains
+        value: "follow-up"
+      - type: not-contains
+        value: "MEMORY.md"
+      - type: llm-rubric
+        value: >
+          Does the output demonstrate a client-focused review that references
+          Strategy Notes from the client file and drafts or mentions drafting
+          a follow-up email in [Owner]'s voice? It should NOT update MEMORY.md
+          standing items (that's coaching-only).
+
+  # --- Handoff is /triage ---
+
+  - description: "HANDOFF — suggests /triage not /cockpit"
+    vars:
+      today: "2026-03-13"
+      trigger: "review BigCorp call"
+    assert:
+      - type: icontains
+        value: "triage"
+      - type: not-contains
+        value: "/cockpit"
+      - type: llm-rubric
+        value: >
+          Does the output suggest running /triage (not /cockpit) as the
+          next step to catch anything that fell through the cracks?
+
+  # --- Null contacts validation ---
+
+  - description: "VALIDATION — no null contacts_ids written"
+    vars:
+      today: "2026-03-13"
+      trigger: "review BigCorp call"
+    assert:
+      - type: not-contains
+        value: "contacts_ids: null"
+      - type: llm-rubric
+        value: >
+          When creating the Interaction file, does the output either omit
+          the contacts_ids field entirely or use an empty array [] instead
+          of setting it to null? The value "contacts_ids: null" must never
+          appear in any created file.

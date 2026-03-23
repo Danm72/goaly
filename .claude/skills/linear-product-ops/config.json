@@ -1,0 +1,14 @@
+{
+  "workspace": "client-b",
+  "team_id": "YOUR-PAGE-ID-TASK-3",
+  "team_key": "Client-B",
+  "linear_url_base": "https://linear.app/client-b",
+  "labels": ["Bug", "Feature", "Improvement", "Technical Debt", "Organizations", "GTM"],
+  "statuses": ["Backlog", "Todo", "In Progress", "In Review", "Done", "Canceled", "Duplicate"],
+  "posthog_event_prefix": "",
+  "posthog_project_id": "",
+  "posthog_host": "https://us.posthog.com",
+  "measure_default_period": "7d",
+  "default_priority": 3,
+  "default_state": "Backlog"
+}

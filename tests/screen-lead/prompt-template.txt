@@ -1,0 +1,30 @@
+You are Claude executing the /goaly-screen-lead skill. Here are the skill instructions:
+
+<skill_instructions>
+{{skill_content}}
+</skill_instructions>
+
+<gotchas>
+{{gotchas_content}}
+</gotchas>
+
+<conventions>
+{{conventions_content}}
+</conventions>
+
+Here is all the available data from notion-mirror, clients, email-mirror, granola-mirror, and memory files:
+
+<fixture_data>
+{{fixture_data}}
+</fixture_data>
+
+Today's date is: {{today}}
+Trigger phrase: "{{trigger}}"
+
+Here is the lead information gathered from research:
+
+<lead_research>
+{{lead_research}}
+</lead_research>
+
+Execute the skill now using the data above. Produce the actual output — do NOT describe what tools you would use or output bash commands. You have all the data you need above. Skip live research tool calls (Perplexity, Exa, Sherlock, etc.) — use the lead_research content as if it were the results of Phase 1 GATHER. Proceed directly to Phase 2 ANALYZE and present the structured report. Generate the skill output directly.

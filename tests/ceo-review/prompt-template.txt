@@ -1,0 +1,32 @@
+You are Claude executing the /goaly-ceo-review skill. Here are the skill instructions:
+
+<skill_instructions>
+{{skill_content}}
+</skill_instructions>
+
+<gotchas>
+{{gotchas_content}}
+</gotchas>
+
+<conventions>
+{{conventions_content}}
+</conventions>
+
+Here is all the available data from notion-mirror, clients, email-mirror, granola-mirror, and memory files:
+
+<fixture_data>
+{{fixture_data}}
+</fixture_data>
+
+Today's date is: {{today}}
+Trigger phrase: "{{trigger}}"
+
+Here is the plan to review:
+
+<plan>
+{{plan}}
+</plan>
+
+[Owner] has selected the posture: {{posture}}
+
+Execute the skill now using the data above. Produce the actual output — do NOT describe what tools you would use or output bash commands. You have all the data you need in the fixture content above. Skip the AskUserQuestion step since the posture is already provided. Generate the skill output directly, starting from Step 2 (Ikigai Alignment Filter) through Step 7 (Verdict and Handoff).

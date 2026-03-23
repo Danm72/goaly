@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Post-commit hook: async push notion-mirror changes to Notion
+# Install: git config core.hooksPath .githooks
+
+set -euo pipefail
+
+# Skip [sync] commits to prevent loops
+COMMIT_MSG=$(git log -1 --pretty=%B)
+if [[ "$COMMIT_MSG" == *"[sync]"* ]]; then
+  exit 0
+fi
+
+# Check if any notion-mirror/ files changed in this commit
+CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD -- notion-mirror/ 2>/dev/null || true)
+if [[ -z "$CHANGED" ]]; then
+  exit 0
+fi
+
+# Get project root
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+SYNC_DIR="$PROJECT_ROOT/tools/notion-sync"
+LOG_DIR="$PROJECT_ROOT/.sync-log"
+
+# Ensure log directory exists
+mkdir -p "$LOG_DIR"
+
+# Extract changed files relative to notion-mirror/
+FILES=$(echo "$CHANGED" | sed 's|^notion-mirror/||' | tr '\n' ' ')
+
+# Run push async — fully detached from parent process
+(
+  cd "$SYNC_DIR"
+  NOTION_TOKEN=$(python3 -c "import json; h=json.loads(json.load(open('$PROJECT_ROOT/.mcp.json'))['mcpServers']['_disabled_notion']['env']['OPENAPI_MCP_HEADERS']); print(h['Authorization'].replace('Bearer ', ''))")
+  export NOTION_TOKEN
+  echo "--- $(date -u +%Y-%m-%dT%H:%M:%SZ) post-commit push ---" >> "$LOG_DIR/push.log"
+  echo "Files: $FILES" >> "$LOG_DIR/push.log"
+  npx tsx sync.ts push --files $FILES >> "$LOG_DIR/push.log" 2>&1
+  echo "Exit: $?" >> "$LOG_DIR/push.log"
+) </dev/null >"$LOG_DIR/push-bg.log" 2>&1 &
+disown 2>/dev/null || true
+exit 0
