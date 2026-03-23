@@ -20,7 +20,7 @@ Then in Claude Code:
 Answer 5 questions about your goals, KPIs, clients, and working style. The wizard generates all your starter files. Then:
 
 ```
-/cockpit
+/mission
 ```
 
 Get your first scorecard, task ranking, and spear-sharpening check. No Notion, no API keys, no setup beyond this.
@@ -31,7 +31,7 @@ Get your first scorecard, task ranking, and spear-sharpening check. No Notion, n
 
 | Skill | What It Does | Trigger |
 |-------|-------------|---------|
-| `/cockpit` | Weekly planning (Monday) + daily pulse check | "plan my week", "quick check" |
+| `/mission` | Weekly planning (Monday) + daily pulse check | "plan my week", "quick check" |
 | `/goaly-triage` | Surface actionable items from calendar + email | "anything I'm missing?" |
 | `/goaly-coaching-prep` | Structured agenda for coaching sessions | "prep for coaching" |
 | `/goaly-review-meeting` | Transcript → action items → tasks → follow-up | "review notes from [meeting]" |
@@ -44,7 +44,7 @@ Get your first scorecard, task ranking, and spear-sharpening check. No Notion, n
 
 Plus `linear-product-ops` for Linear board management.
 
-### The Cockpit
+### The Mission
 
 The flagship skill. Every Monday it:
 
@@ -137,7 +137,7 @@ The core system works with just markdown files and Claude Code. These tools add 
 
 ### Modify Scoring
 
-Edit `.claude/skills/goaly-cockpit/references/scoring-rules.md` to change how tasks are ranked. The default weights MRR and product shipping highest.
+Edit `.claude/skills/goaly-mission/references/scoring-rules.md` to change how tasks are ranked. The default weights MRR and product shipping highest.
 
 ### Add Your Own Skills
 
@@ -167,10 +167,10 @@ Edit `CLAUDE.md` to modify:
 for d in .claude/skills/goaly-*/; do bash tests/validate-skill-structure.sh "$d"; done
 
 # Run computation tests for a specific skill
-bash tests/cockpit/test-computations.sh
+bash tests/mission/test-computations.sh
 
 # Run LLM eval (requires promptfoo)
-promptfoo eval -c tests/cockpit/promptfooconfig.yaml
+promptfoo eval -c tests/mission/promptfooconfig.yaml
 ```
 
 ## Project Structure
@@ -183,7 +183,7 @@ goaly/
 ├── notion-mirror/               # Your business data (markdown files)
 ├── email-mirror/                # Optional: synced email threads
 ├── granola-mirror/              # Optional: meeting transcripts
-├── dashboards/                  # Generated cockpit dashboards
+├── dashboards/                  # Generated mission dashboards
 ├── tools/                       # Notion, email, and Granola sync
 ├── tests/                       # Skill tests and fixtures
 ├── clients/templates/           # Contract and meeting templates
@@ -197,4 +197,4 @@ MIT
 
 ## Credits
 
-Built by [Dan Malone](https://dan-malone.com). Read the full story: [Every Monday I Type /cockpit — 9 Claude Code Skills That Run My Business](https://dan-malone.com/blog/goaly-9-claude-code-skills-that-run-my-business).
+Built by [Dan Malone](https://dan-malone.com). Read the full story: [Every Monday I Type /mission — 9 Claude Code Skills That Run My Business](https://dan-malone.com/blog/goaly-9-claude-code-skills-that-run-my-business).

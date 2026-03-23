@@ -16,4 +16,4 @@ goal: Build Portfolio of Internet Companies
 Track total MRR across all revenue streams: retainers, product subscriptions, and recurring project work.
 
 ## How to Update
-Confirm actual MRR during Monday /cockpit planning. Don't estimate from hourly rates x arbitrary hours — use confirmed recurring commitments only.
+Confirm actual MRR during Monday /mission planning. Don't estimate from hourly rates x arbitrary hours — use confirmed recurring commitments only.

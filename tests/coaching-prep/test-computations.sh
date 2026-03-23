@@ -9,7 +9,7 @@ PASS=0
 FAIL=0
 TESTS=0
 
-# --- Helpers (same as cockpit) ---
+# --- Helpers (same as mission) ---
 
 assert_eq() {
   local label="$1" expected="$2" actual="$3"

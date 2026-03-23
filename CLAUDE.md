@@ -105,7 +105,7 @@ Workflows are loaded on-demand as skills via `.claude/skills/`. Invoke with `/sk
 
 | Skill | Triggers | Purpose |
 |-------|----------|---------|
-| `/goaly-cockpit` | "plan my week", "weekly planning", "quick check" | Monday full planning (retro + energy budget + task ranking) or weekday pulse check |
+| `/goaly-mission` | "plan my week", "weekly planning", "quick check" | Monday full planning (retro + energy budget + task ranking) or weekday pulse check |
 | `/goaly-coaching-prep` | "prep for coaching", "coaching prep" | Pre-coaching agenda: goals, KPIs, metrics, standing items |
 | `/goaly-review-meeting [client]` | "review notes from X", "review call" | Post-meeting: transcript to Interaction file, tasks, follow-up email |
 | `/goaly-triage` | "check emails", "check calendar", "anything missing?" | Calendar + email triage, cross-reference with existing tasks |
@@ -367,7 +367,7 @@ for d in tests/*/; do bash "$d/test-computations.sh" 2>/dev/null; done
 bash tests/coaching-prep/test-computations.sh
 
 # Run Layer 2 eval for one skill
-promptfoo eval -c tests/cockpit/promptfooconfig.yaml
+promptfoo eval -c tests/mission/promptfooconfig.yaml
 ```
 
 ### Fixtures

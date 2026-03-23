@@ -1,19 +1,19 @@
-# /cockpit Smoke Test Checklist
+# /mission Smoke Test Checklist
 
 Manual verification when the skill changes significantly. Run through all items before committing SKILL.md changes.
 
 ## Pre-Requisites
 
 - [ ] `git pull` completed (fresh notion-mirror data)
-- [ ] Layer 1 tests pass: `bash tests/cockpit/test-computations.sh`
-- [ ] Layer 2 eval baseline exists (or run first): `promptfoo eval -c tests/cockpit/promptfooconfig.yaml`
+- [ ] Layer 1 tests pass: `bash tests/mission/test-computations.sh`
+- [ ] Layer 2 eval baseline exists (or run first): `promptfoo eval -c tests/mission/promptfooconfig.yaml`
 
 ## Mode Detection
 
-- [ ] Run `/cockpit` on a **Monday** — verify MONDAY mode activates (full planning: scorecard, retro, energy budget, task ranking)
-- [ ] Run `/cockpit` on a **weekday** — verify PULSE mode (scorecard + flags + today only, no task triage)
-- [ ] Run `/cockpit` with **"coaching prep"** — verify COACHING mode (coaching agenda, standing items, no energy budget)
-- [ ] Run `/cockpit` with **"prep for [Coach]"** — verify COACHING mode triggers
+- [ ] Run `/mission` on a **Monday** — verify MONDAY mode activates (full planning: scorecard, retro, energy budget, task ranking)
+- [ ] Run `/mission` on a **weekday** — verify PULSE mode (scorecard + flags + today only, no task triage)
+- [ ] Run `/mission` with **"coaching prep"** — verify COACHING mode (coaching agenda, standing items, no energy budget)
+- [ ] Run `/mission` with **"prep for [Coach]"** — verify COACHING mode triggers
 
 ## Strategic Scorecard
 
@@ -67,6 +67,6 @@ Manual verification when the skill changes significantly. Run through all items 
 ## Regression Check
 
 After SKILL.md changes:
-- [ ] Run Layer 1: `bash tests/cockpit/test-computations.sh` — all pass
-- [ ] Run Layer 2: `promptfoo eval -c tests/cockpit/promptfooconfig.yaml`
+- [ ] Run Layer 1: `bash tests/mission/test-computations.sh` — all pass
+- [ ] Run Layer 2: `promptfoo eval -c tests/mission/promptfooconfig.yaml`
 - [ ] Compare Layer 2 results to baseline: `promptfoo eval --compare` — no regression

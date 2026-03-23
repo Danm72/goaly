@@ -1,6 +1,6 @@
-# Cockpit Gotchas
+# Mission Gotchas
 
-Failure modes specific to the cockpit skill. Read before every run.
+Failure modes specific to the mission skill. Read before every run.
 
 - **MRR is confirmed by [Owner], not calculated.** MRR comes from MEMORY.md Active Leads monthly estimates. Rates in client files are hourly — multiplying rate x arbitrary hours is misleading. Always present computed value and ask [Owner] to confirm.
 - **Meta-KPIs are ephemeral.** Execution Score, High-Leverage Ratio, Deep Work Ratio are computed per session and presented in chat only. They are NOT written to Notion KPI files or notion-mirror.

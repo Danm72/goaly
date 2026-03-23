@@ -1,8 +1,8 @@
-# promptfooconfig.yaml — Layer 2 eval suite for /cockpit skill
-# Run: promptfoo eval -c tests/cockpit/promptfooconfig.yaml
+# promptfooconfig.yaml — Layer 2 eval suite for /mission skill
+# Run: promptfoo eval -c tests/mission/promptfooconfig.yaml
 # View: promptfoo view
 
-description: "Cockpit Skill Eval Suite"
+description: "Mission Skill Eval Suite"
 
 providers:
   - id: anthropic:messages:claude-sonnet-4-20250514
@@ -15,9 +15,9 @@ prompts:
 
 defaultTest:
   vars:
-    skill_content: "file://../../.claude/skills/goaly-cockpit/SKILL.md"
+    skill_content: "file://../../.claude/skills/goaly-mission/SKILL.md"
     fixture_data: "file://fixtures-concat.md"
-    gotchas_content: "file://../../.claude/skills/goaly-cockpit/gotchas.md"
+    gotchas_content: "file://../../.claude/skills/goaly-mission/gotchas.md"
     conventions_content: "file://../../.claude/skills/_shared/conventions.md"
 
 tests:
@@ -27,7 +27,7 @@ tests:
     vars:
       today: "2026-03-13"
       day_of_week: "4"
-      trigger: "/cockpit"
+      trigger: "/mission"
     assert:
       - type: contains
         value: "Scorecard"
@@ -65,7 +65,7 @@ tests:
     vars:
       today: "2026-03-10"
       day_of_week: "1"
-      trigger: "/cockpit"
+      trigger: "/mission"
     assert:
       - type: contains
         value: "Scorecard"
@@ -144,7 +144,7 @@ tests:
     vars:
       today: "2026-03-13"
       day_of_week: "4"
-      trigger: "/cockpit"
+      trigger: "/mission"
     assert:
       - type: icontains
         value: "BigCorp"

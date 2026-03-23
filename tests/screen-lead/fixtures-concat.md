@@ -88,7 +88,7 @@ _last_synced: 2026-03-10T10:00:00.000Z
 _notion_edited: 2026-03-10T10:00:00.000Z
 ---
 
-Primary goal — should appear in cockpit scorecard.
+Primary goal — should appear in mission scorecard.
 
 === notion-mirror/goals/archived-goal.md ===
 ---
@@ -102,7 +102,7 @@ _last_synced: 2026-01-15T10:00:00.000Z
 _notion_edited: 2026-01-15T10:00:00.000Z
 ---
 
-Deprioritized goal — should NOT appear in cockpit.
+Deprioritized goal — should NOT appear in mission.
 
 === notion-mirror/goals/unmeasured-goal.md ===
 ---

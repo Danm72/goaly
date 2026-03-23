@@ -241,10 +241,10 @@ done < <(find "$FIXTURES/notion-mirror/interactions" -name "*.md" -type f)
 echo ""
 echo "=== Test 8: Handoff Suggestion ==="
 
-# SKILL.md Step 9 should suggest /goaly-triage, NOT /cockpit
+# SKILL.md Step 9 should suggest /goaly-triage, NOT /mission
 skill_content=$(cat "$SKILL")
 assert_contains "SKILL.md mentions /goaly-triage handoff" "/goaly-triage" "$skill_content"
-assert_not_contains "SKILL.md does NOT suggest /cockpit" "/cockpit" "$skill_content"
+assert_not_contains "SKILL.md does NOT suggest /mission" "/mission" "$skill_content"
 
 # Verify the exact handoff text
 assert_contains "Handoff text says 'Run \`/goaly-triage\`'" 'Run `/goaly-triage`' "$skill_content"

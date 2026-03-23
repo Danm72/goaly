@@ -1,6 +1,6 @@
 ---
-name: goaly-cockpit
-description: "Use when doing weekly planning (Mondays) or daily pulse checks. Two modes: MONDAY (full planning with retro + energy budget + task ranking), PULSE (weekday scorecard + flags). Triggers: '/cockpit', 'plan my week', 'weekly planning', 'quick check'."
+name: goaly-mission
+description: "Use when doing weekly planning (Mondays) or daily pulse checks. Two modes: MONDAY (full planning with retro + energy budget + task ranking), PULSE (weekday scorecard + flags). Triggers: '/mission', 'plan my week', 'weekly planning', 'quick check'."
 allowed-tools:
   - Read
   - Edit
@@ -11,11 +11,11 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# /goaly-cockpit — Strategic Cockpit
+# /goaly-mission — Strategic Mission
 
 ## Before You Start
 1. Read `.claude/skills/_shared/conventions.md` — shared process rules and data integrity gotchas
-2. Read `gotchas.md` in this directory — cockpit-specific failure modes
+2. Read `gotchas.md` in this directory — mission-specific failure modes
 
 ### Learned Preferences
 !`tail -20 "${CLAUDE_SKILL_DIR}/data/feedback.log" 2>/dev/null || echo "No feedback yet — preferences will accumulate over sessions."`
@@ -29,7 +29,7 @@ allowed-tools:
 
 Top-down strategic dashboard. KPIs first, patterns second, tasks last. Detects mode from day of week. Three-phase: collect data in parallel, analyze without I/O, interact with [Owner].
 
-> **Coaching prep:** Use `/goaly-coaching-prep` for [Coach] sessions (not cockpit).
+> **Coaching prep:** Use `/goaly-coaching-prep` for [Coach] sessions (not mission).
 
 ## STEP 0: Freshness Check
 
@@ -44,7 +44,7 @@ See `_shared/conventions.md` for sync verification and freshness check process.
 | **PULSE** | Weekday (default) | 0-5, Today |
 | **MONDAY** | day_of_week == 1, or explicit planning trigger | All (0-10) |
 
-Announce: `## Cockpit — [Mode] ([Day, Date])`
+Announce: `## Mission — [Mode] ([Day, Date])`
 
 ## STEP 2: Parallel Data Collection
 
@@ -173,7 +173,7 @@ Present: Rank | Task | Project | Impact | Energy | Score. Use AskUserQuestion mu
 
 ```bash
 git add notion-mirror/
-git commit -m "chore: cockpit monday — plan week of [date]" </dev/null 2>&1
+git commit -m "chore: mission monday — plan week of [date]" </dev/null 2>&1
 git push
 ```
 
@@ -210,7 +210,7 @@ Only log **general preferences** that apply to future sessions — skip task-spe
 
 | Purpose | Path |
 |---------|------|
-| Cockpit gotchas | `gotchas.md` (this directory) |
+| Mission gotchas | `gotchas.md` (this directory) |
 | Impact scoring criteria | `references/scoring-rules.md` |
 | Ephemeral KPI formulas | `references/meta-kpis.md` |
 | Shared conventions | `.claude/skills/_shared/conventions.md` |

@@ -191,7 +191,7 @@ Maps [Owner]'s natural commands to actions. Entries marked with a skill name are
 | "Add [name] as a contact for [client]" | Write `notion-mirror/contacts/<name>.md` with client relation in frontmatter |
 | "Update [client] notes" | Edit `notion-mirror/clients/<slug>.md`, update Strategy Notes section in body |
 | "How's my pipeline?" | Grep `"^status:"` in `notion-mirror/clients/`, group by status, summarize Active/Lead counts and MRR |
-| "Any clients I'm neglecting?" | Grep interactions per client, flag any Active client with last interaction > 14 days ago. Also surfaced by `/cockpit` pattern detection. |
+| "Any clients I'm neglecting?" | Grep interactions per client, flag any Active client with last interaction > 14 days ago. Also surfaced by `/mission` pattern detection. |
 | "New client [name]" | Use `/onboard-client` skill |
 | "Prep for [client] meeting" | Use `/meeting-prep` skill |
 | "Review [client] call" | Use `/review-meeting` skill |

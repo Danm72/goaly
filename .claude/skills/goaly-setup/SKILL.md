@@ -159,7 +159,7 @@ Update `.claude-memory/owner-profile.md` to append:
 
 1. Commit all generated files with message: `feat(setup): initialize workspace via goaly-setup wizard`
 2. Print a summary of everything created (file count by category)
-3. End with: **"Type /cockpit to see your first scorecard."**
+3. End with: **"Type /mission to see your first scorecard."**
 
 ## File Naming
 

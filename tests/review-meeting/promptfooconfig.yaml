@@ -62,7 +62,7 @@ tests:
 
   # --- Handoff is /triage ---
 
-  - description: "HANDOFF — suggests /triage not /cockpit"
+  - description: "HANDOFF — suggests /triage not /mission"
     vars:
       today: "2026-03-13"
       trigger: "review BigCorp call"
@@ -70,10 +70,10 @@ tests:
       - type: icontains
         value: "triage"
       - type: not-contains
-        value: "/cockpit"
+        value: "/mission"
       - type: llm-rubric
         value: >
-          Does the output suggest running /triage (not /cockpit) as the
+          Does the output suggest running /triage (not /mission) as the
           next step to catch anything that fell through the cracks?
 
   # --- Null contacts validation ---

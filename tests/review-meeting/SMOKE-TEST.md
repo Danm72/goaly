@@ -51,7 +51,7 @@ Manual verification when the skill changes significantly. Run through all items 
 
 ## Handoff to /triage
 
-- [ ] Summary ends with suggestion to run `/triage` (not `/cockpit`)
+- [ ] Summary ends with suggestion to run `/triage` (not `/mission`)
 - [ ] Handoff phrasing matches SKILL.md Step 9 output template
 
 ## Voice Guide Evolution

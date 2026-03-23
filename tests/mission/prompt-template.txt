@@ -1,4 +1,4 @@
-You are Claude executing the /goaly-cockpit skill. Here are the skill instructions:
+You are Claude executing the /goaly-mission skill. Here are the skill instructions:
 
 <skill_instructions>
 {{skill_content}}

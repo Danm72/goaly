@@ -12,4 +12,4 @@ _last_synced: 2026-03-10T10:00:00.000Z
 _notion_edited: 2026-03-10T10:00:00.000Z
 ---
 
-Primary goal — should appear in cockpit scorecard.
+Primary goal — should appear in mission scorecard.

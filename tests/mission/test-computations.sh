@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# test-computations.sh — Layer 1 deterministic tests for /cockpit skill
+# test-computations.sh — Layer 1 deterministic tests for /mission skill
 # Tests the computation logic the skill relies on without needing an LLM.
-# Run: cd "/Users/dan/Admin/Goals & Tasks" && bash tests/cockpit/test-computations.sh
+# Run: cd "/Users/dan/Admin/Goals & Tasks" && bash tests/mission/test-computations.sh
 
 set -euo pipefail
 
@@ -374,7 +374,7 @@ assert_eq "Archived goals excluded" "1" "$archived_goals"
 echo ""
 echo "=== Test 12: Grep Pattern Verification ==="
 
-# These are the exact patterns the cockpit SKILL.md uses — verify they match fixtures
+# These are the exact patterns the mission SKILL.md uses — verify they match fixtures
 pattern_results=$(grep -rl "^lifecycle: Active" "$FIXTURES"/kpis/ 2>/dev/null | wc -l | tr -d ' ')
 assert_eq "Grep '^lifecycle: Active' on kpis/" "3" "$pattern_results"
 
